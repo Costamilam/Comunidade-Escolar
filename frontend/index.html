@@ -1,0 +1,42 @@
+<html lang="pt-BR" ng-app="appDataPOA">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Projeto Final</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.10/angular.min.js"></script>
+    <script src="./controller.js"></script>
+    <link rel="stylesheet" type="text/css" href="./css/style.css">
+</head>
+<body ng-controller="controllerDataPOA as controller">
+    <header><nav>
+        <ul>
+            <li ng-click="currentActivity = 'index'">Home</li>
+            <li ng-click="currentActivity = 'getDataPOA'">UFEF</li>
+            <li>Usuários
+                <ul>
+                    <li ng-click="currentActivity = 'formAuthUser'">Conectar</li>
+                    <li ng-click="currentActivity = 'formPostUser'">Cadastrar</li>
+                    <li ng-click="currentActivity = 'formPutUser'">Meu perfil</li>
+                    <li ng-click="currentActivity = 'formGetUser'">Buscar</li>
+                </ul>
+            </li>
+            <li>Encontros
+                <ul>
+                    <li ng-click="currentActivity = 'formPostMeeting'">Criar</li>
+                    <li ng-click="currentActivity = 'formGetMeeting'">Buscar</li>
+                    <li ng-click="currentActivity = 'dinamicTable'; submitData('GET', '/meeting/meetingUser/'+sessionStorage.user_id)">Meus</li>
+                </ul>
+            </li>
+        </ul>
+    </nav></header>
+
+    <dialog>
+        <h1>{{dataResponse.data.title}}</h1>
+        <p>{{dataResponse.data.message}}</p>
+        <button ng-click="dialog.removeAttribute('open')">FECHAR</button>
+    </dialog>
+
+    <ng-include src="'./include/'+currentActivity+'.html'"></ng-include>
+</body>
+</html>

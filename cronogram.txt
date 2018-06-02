@@ -1,0 +1,48 @@
+
+FASE 1
+
+Consumir as 3 API do DataPOA (http://datapoa.com.br/dataset?groups=educacao) 
+e do Google Maps (https://developers.google.com/maps/documentation/javascript/directions?hl=pt-br)
+
+ - Consultar e mostrar os dados 
+ - Usar serviço de rotas da API do Google Maps para criar rotas da localização atual
+   do usuário até a instituição selecionada
+ - Personalizar a seleção de instituições (favoritas)
+
+
+FASE 2
+
+Usar o banco dedados do firebase para cadastrar usuários e encontros
+
+ - Usar autenticação OAuth na aplicação (Facebook, Twitter, Google, Giuhub, email e senha)
+ - Cadastrar dados do usuário (nome, sua instituição(opicional), telefone, facebook, snap, twitter)
+
+
+FASE 3
+
+Personalizar a criação de rotas do Google Maps
+
+ - Personalizar as rotas: 
+	* Tipo de transporte - ônibus, carro, bicicleta ... 
+	* Opções de condução
+		- Horário de partida, 
+		- Modelo (estimativa real, pior etimativa ou melhor estimativa), 
+	* Opções de transito 
+		- Horário de chegada, 
+		- Saida, modos (ônibus, metro, trem ...), 
+		- Preferências (baldeações ou caminhada), 
+		- Múliplos ponos de parada
+		- Otimização das paradas
+		- Fornecer rotas alternaivas
+		- Evitar rodovias principais quando possível
+		- Evitar rodovias com pedágios quando possível
+		- Região
+	* Sistemas de unidades (milhas ou quilômetros)
+	* Opcionalmente, mostrar o que deve ser feito (ande X metros, vire a direita)
+	* Opcionalmente, colocar áudio do que deve ser feito (ande X metros, vire a direita)
+	* Arrastar a linha da rota para personalizar
+
+FASE 4
+
+Tentar deixar bonito
+

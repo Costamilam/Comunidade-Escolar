@@ -1,0 +1,8 @@
+<form action="meeting/" method="GET" ng-submit="submitData($event)" id="formGetMeeting">
+    <input type="text" ng-model="dataSend.meetingName" placeholder="Nome do encontro">
+    <input type="datetime-local" ng-model="dataSend.meetingDate" placeholder="Data do encontrol">
+    <input type="text" ng-model="dataSend.meetingPlace" placeholder="Local do encontro">
+
+    <input type="submit" value="Buscar">
+    <button type="button">Cancelar</button>
+</form>

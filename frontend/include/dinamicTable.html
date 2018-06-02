@@ -1,0 +1,14 @@
+<h1>{{dataResponse.data.title}}</h1>
+<p>{{dataResponse.data.message}}</p>
+<table>
+    <thead>
+        <tr>
+            <th ng-repeat="key in dataResponse.data.head">{{key}}</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="object in dataResponse.data.result">
+            <td ng-repeat="value in object">{{value}}</td>
+        </tr>
+    </tbody>
+</table>
