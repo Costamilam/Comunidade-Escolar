@@ -1,0 +1,19 @@
+<form ng-submit="addUser()" name="userAddForm">
+    <input type="text" ng-model="user.name" placeholder="Nome" required>
+    <input type="text" ng-model="user.username" placeholder="Nome de usuário" required>
+    <input type="password" ng-model="user.password" placeholder="Senha" required>
+    <input type="email" ng-model="user.email" placeholder="Email">
+    <input type="tel" ng-model="user.phone" placeholder="Celular">
+    <input type="date" ng-model="user.birth" placeholder="Data de nascimento" required>
+    <label>
+        <input type="radio" ng-model="user.gender" ng-value="true" ng-required="user.gender != true && user.gender != false">Masculino
+        <input type="radio" ng-model="user.gender" ng-value="false" ng-required="user.gender != true && user.gender != false">Feminino
+    </label>
+    <select ng-model="user.teachingInstitute" required>
+        <option disabled ng-selected="selected" value="">Instituição de Ensino</option>
+        <option ng-repeat="option in teachingInstitute" value="{{option._id}}">{{option.teachingInstituteName}}</option>
+    </select>
+
+    <input type="submit" value="Cadastrar">
+    <a href="/">Cancelar</a>
+</form>

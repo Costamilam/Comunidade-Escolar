@@ -1,42 +1,55 @@
-<html lang="pt-BR" ng-app="appDataPOA">
+<html lang="pt-BR" ng-app="app">
 <head>
+    <title>Projeto Final</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Projeto Final</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.10/angular.min.js"></script>
-    <script src="./controller.js"></script>
     <link rel="stylesheet" type="text/css" href="./css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.10/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.10/angular-route.min.js"></script>
+    <script src="./app.js"></script>
+    <script src="./value/config.js"></script>
+    <script src="./router/user.js"></script>
+    <script src="./service/user.js"></script>
+    <script src="./service/auth.js"></script>
+    <script src="./service/teachingInstitute.js"></script>
+    <script src="./controller/user.js"></script>
+    <script src="./controller/auth.js"></script>
 </head>
-<body ng-controller="controllerDataPOA as controller">
+<body>
     <header><nav>
         <ul>
-            <li ng-click="currentActivity = 'index'">Home</li>
-            <li ng-click="currentActivity = 'getDataPOA'">UFEF</li>
-            <li>Usuários
+            <li><a href="/">Home</a></li>
+            <li><a>Instituições</a>
                 <ul>
-                    <li ng-click="currentActivity = 'formAuthUser'">Conectar</li>
-                    <li ng-click="currentActivity = 'formPostUser'">Cadastrar</li>
-                    <li ng-click="currentActivity = 'formPutUser'">Meu perfil</li>
-                    <li ng-click="currentActivity = 'formGetUser'">Buscar</li>
+                    <li><a href="">Todas</a></li>
+                    <li><a href="">Buscar</a></li>
                 </ul>
             </li>
-            <li>Encontros
+            <li><a>Usuários</a>
                 <ul>
-                    <li ng-click="currentActivity = 'formPostMeeting'">Criar</li>
-                    <li ng-click="currentActivity = 'formGetMeeting'">Buscar</li>
-                    <li ng-click="currentActivity = 'dinamicTable'; submitData('GET', '/meeting/meetingUser/'+sessionStorage.user_id)">Meus</li>
+                    <li><a href="#!/user/auth">Conectar</a></li>
+                    <li><a href="#!/user/add">Cadastrar</a></li>
+                    <li><a href="#!/user/manage">Meu perfil</a></li>
+                    <li><a href="#!/user/find">Buscar</a></li>
+                </ul>
+            </li>
+            <li><a>Encontros</a>
+                <ul>
+                    <li><a href="">Criar</a></li>
+                    <li><a href="">Buscar</a></li>
+                    <li><a href="">Meus</a></li>
                 </ul>
             </li>
         </ul>
     </nav></header>
 
-    <dialog>
-        <h1>{{dataResponse.data.title}}</h1>
-        <p>{{dataResponse.data.message}}</p>
+    <!--dialog>
+        <h1>{{dialogTitle}}</h1>
+        <p>{{dialogMessage}}</p>
         <button ng-click="dialog.removeAttribute('open')">FECHAR</button>
-    </dialog>
+    </dialog-->
 
-    <ng-include src="'./include/'+currentActivity+'.html'"></ng-include>
+    <ng-view></ng-view>
 </body>
 </html>

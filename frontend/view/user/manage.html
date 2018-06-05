@@ -1,0 +1,20 @@
+<form ng-submit="changeUser()" name="userChangeForm">
+    <input type="text" ng-model="user.name" placeholder="Nome" required>
+    <input type="text" ng-model="user.username" placeholder="Nome de usuário" disabled>
+    <input type="password" ng-model="user.password" placeholder="Senha">
+    <input type="email" ng-model="user.email" placeholder="Email">
+    <input type="tel" ng-model="user.phone" placeholder="Celular">
+    <input type="date" ng-model="user.birth" required>
+    <label>
+        <input type="radio" ng-model="user.gender" ng-value="true" ng-required="user.gender != true && user.gender != false" ng-checked="user.gender">Masculino
+        <input type="radio" ng-model="user.gender" ng-value="false" ng-required="user.gender != true && user.gender != false" ng-checked="user.gender">Feminino
+    </label>
+    <select ng-model="user.teachingInstitute" required>
+        <option disabled ng-selected="selected" value="">Instituição de Ensino</option>
+        <option ng-repeat="option in teachingInstitute" value="{{option._id}}">{{option.teachingInstituteName}}</option>
+    </select>
+
+    <input type="submit" value="Atualizar">
+    <button type="button" ng-click="deleteUser()">Deletar Conta</button>
+    <button type="button">Cancelar</button>
+</form>

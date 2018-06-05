@@ -11,6 +11,7 @@ body {
     justify-content: center;
     flex-direction: column;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 15px;
     transition: linear 1s;
     box-sizing: border-box;
 }
@@ -51,9 +52,12 @@ header > nav ul li {
 }
 header > nav > ul > li {
     flex-direction: column;
-    text-align: center;
 }
-header > nav > ul > li[ng-click]:hover {
+header > nav > ul > li > a {
+    color: #000;
+    margin: auto;
+}
+header > nav > ul > li:nth-child(1):hover {
     box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2);
 }
 header > nav > ul > li > ul {
@@ -66,6 +70,9 @@ header > nav > ul > li > ul {
 }
 header > nav > ul > li:hover > ul {
     opacity: 1;
+}
+header > nav > ul > li:nth-child(2):hover > ul {
+    height: 100px;
 }
 header > nav > ul > li:nth-child(3):hover > ul {
     height: 200px;
@@ -81,8 +88,11 @@ header > nav > ul > li > ul > li {
 header > nav > ul > li:hover > ul > li {
     display: flex;
 }
+header > nav > ul > li > ul > li > a {
+    color: #000;
+}
 
-ng-include {
+ng-view {
     margin-top: 50px;
     padding: 15px;
     box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2);
@@ -107,26 +117,39 @@ dialog button {
 h1 {
     text-align: center;
 }
+a {
+    text-decoration: none;
+}
 
  /* Inputs - form and inputs style */
 form {
     display: flex;
     flex-direction: column;
 }
-input {
+input:not([type="radio"]), select, option, label, button, form a {
+    color: #000;
     padding: 5px;
-    width: 300px;
-    margin: 15px 0;
 }
-input:not([type="submit"]) {
+input:not([type="radio"]), label, select {
+    margin: 15px auto;
+}
+input:not([type="radio"]), select, option, button, form a {
+    width: 300px;
+}
+input:not([type="submit"]):not([type="radio"]), select {
     border-width: 0 0 1px 0;
     border-bottom-color: black;
 }
-input[type="submit"], button {
+input[type="submit"], input:disabled, button, form a, select, option {
     background-color: transparent;
     border: none;
 }
-input:focus {
+input[type="submit"], button, form a {
+    margin: 10px auto;
+    text-align: center;
+    font-size: 1rem;
+}
+input:focus, button:focus {
     outline: 0;
 }
 

@@ -1,0 +1,10 @@
+<form ng-submit="findUser()" name="userFindForm">
+    <input type="text" ng-model="user.name" placeholder="Nome" required>
+    <select ng-model="user.teachingInstitute">
+        <option ng-selected="selected" value="">Instituição de Ensino</option>
+        <option ng-repeat="option in teachingInstitute" value="{{option._id}}">{{option.teachingInstituteName}}</option>
+    </select>
+
+    <input type="submit" ng-disabled="userFindForm.$invalid" value="Cadastrar">
+    <a href="/">Cancelar</a>
+</form>
