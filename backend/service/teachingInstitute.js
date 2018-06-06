@@ -15,7 +15,7 @@ module.exports.find = async function() {
 module.exports.findByName = async function(name) {
     const connection = await mongodb.connection(collection);
     
-    let select = await connection.find({teachingInstituteName: name});
+    let select = await connection.find({name: name});
 
     return await select.toArray();
 }

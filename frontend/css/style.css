@@ -93,8 +93,9 @@ header > nav > ul > li > ul > li > a {
 }
 
 ng-view {
-    margin-top: 50px;
-    padding: 15px;
+    min-width: 700px;
+    margin: 100px auto;
+    padding: 25px 50px 0 50px;
     box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2);
 }
 
@@ -148,6 +149,21 @@ input[type="submit"], button, form a {
     margin: 10px auto;
     text-align: center;
     font-size: 1rem;
+}
+input, button {
+    transition: border ease-in-out 0.7s, color ease-in-out 0.7s;
+}
+input:focus:required:invalid {
+    border-bottom-color: #CC0000
+}
+input[valid="false"]:focus {
+    border-bottom-color: #CC0000 !important;
+}
+input:focus:required:valid {
+    border-bottom-color: #00CC00
+}
+input:disabled, button:disabled {
+    color: #C2C2C2;
 }
 input:focus, button:focus {
     outline: 0;

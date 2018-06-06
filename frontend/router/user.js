@@ -5,8 +5,9 @@ angular.module('app').config(function($routeProvider) {
             controller: 'controllerUser',
             resolve: {
                 teachingInstitute: function(serviceTeachingInstitute) {
-                    return serviceTeachingInstitute.getTeachingInstitute();
-                }
+                    return serviceTeachingInstitute.getAll();
+                },
+                currentUser: () => null
             }
         })
         .when('/user/find', {
@@ -14,8 +15,9 @@ angular.module('app').config(function($routeProvider) {
             controller: 'controllerUser',
             resolve: {
                 teachingInstitute: function(serviceTeachingInstitute) {
-                    return serviceTeachingInstitute.getTeachingInstitute();
-                }
+                    return serviceTeachingInstitute.getAll();
+                },
+                currentUser: () =>  null
             }
         })
         .when('/user/manage', {
@@ -23,11 +25,19 @@ angular.module('app').config(function($routeProvider) {
             controller: 'controllerUser',
             resolve: {
                 teachingInstitute: function(serviceTeachingInstitute) {
-                    return serviceTeachingInstitute.getTeachingInstitute();
+                    return serviceTeachingInstitute.getAll();
                 },
                 currentUser: function(serviceAuth) {
                     return serviceAuth.getDataLocally();
                 }
+            }
+        })
+        .when('/user/table', {
+            templateUrl: './view/user/table.html',
+            controller: 'controllerUser',
+            resolve: {
+                teachingInstitute: () =>  null,
+                currentUser: () =>  null
             }
         })
         .when('/user/auth', {

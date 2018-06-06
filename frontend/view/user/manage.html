@@ -11,10 +11,10 @@
     </label>
     <select ng-model="user.teachingInstitute" required>
         <option disabled ng-selected="selected" value="">Instituição de Ensino</option>
-        <option ng-repeat="option in teachingInstitute" value="{{option._id}}">{{option.teachingInstituteName}}</option>
+        <option ng-repeat="option in teachingInstitute" value="{{option._id}}">{{option.name}}</option>
     </select>
 
-    <input type="submit" value="Atualizar">
+    <input type="submit" ng-disabled="userFindForm.$invalid" value="Atualizar">
     <button type="button" ng-click="deleteUser()">Deletar Conta</button>
     <button type="button">Cancelar</button>
 </form>

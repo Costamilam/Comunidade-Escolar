@@ -5,7 +5,7 @@ const bcrypt = require('../bcrypt.js');
 const router = require('express').Router();
 
 //Search user
-router.get('/teachingInstitute/(:teachingInstituteId)?/name/:name/', async function(request, response) {
+router.get('/name/(:name)?/teachingInstitute/(:teachingInstituteId)?', async function(request, response) {
     let user = {
         name: new RegExp(`.*${request.params.name.replace(' ', '.*')}.*`, 'i'),
         teachingInstitute: request.params.teachingInstituteId
@@ -19,23 +19,16 @@ router.get('/teachingInstitute/(:teachingInstituteId)?/name/:name/', async funct
 
     let result = await service.findByNameAndTeachingInstitute(user);
 
-    console.log(user)
-
-    response.send({
-        head: result[0] ? Object.keys(result[0]) : [],
-        result: result
-    });
+    response.send(result);
 });
 
 //Search userUsername
-router.get('/username/:userame', async function(request, response) {
+router.get('/username/:username', async function(request, response) {
     //Validate
 
     let result = await service.findByUsername(request.params.username);
 
-    response.send({
-        result: result.length == 0 ? true : false
-    });
+    response.send(!result.length);
 });
 
 //Insert user

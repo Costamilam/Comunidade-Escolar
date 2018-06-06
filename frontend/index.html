@@ -10,11 +10,13 @@
     <script src="./app.js"></script>
     <script src="./value/config.js"></script>
     <script src="./router/user.js"></script>
+    <script src="./router/teachingInstitute.js"></script>
     <script src="./service/user.js"></script>
     <script src="./service/auth.js"></script>
     <script src="./service/teachingInstitute.js"></script>
     <script src="./controller/user.js"></script>
     <script src="./controller/auth.js"></script>
+    <script src="./controller/teachingInstitute.js"></script>
 </head>
 <body>
     <header><nav>
@@ -22,8 +24,8 @@
             <li><a href="/">Home</a></li>
             <li><a>Instituições</a>
                 <ul>
-                    <li><a href="">Todas</a></li>
-                    <li><a href="">Buscar</a></li>
+                    <li><a href="#!/teachingInstitute/table" ng-click="getAll()">Todas</a></li>
+                    <li><a href="#!/teachingInstitute/find">Buscar</a></li>
                 </ul>
             </li>
             <li><a>Usuários</a>

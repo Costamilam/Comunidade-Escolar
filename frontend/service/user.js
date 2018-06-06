@@ -7,17 +7,17 @@ angular.module('app').service('serviceUser', function ($http, config) {
         });
 	};
 
-	this.verifyUser = function(username) {
+	this.verifyUsername = function(username) {
 		return $http({
             method: 'GET',
-            url: config.domain + `/user/userUsername/${username}`
+            url: config.domain + `/user/username/${username}`
         });
 	};
 
 	this.findUser = function(name, teachingInstitute) {
 		return $http({
             method: 'GET',
-            url: config.domain + `/user/name/${name}/teachingInstitute/${teachingInstitute}`
+            url: config.domain + `/user/name/${name || ''}/teachingInstitute/${teachingInstitute || ''}`
         });
 	};
 
@@ -29,11 +29,10 @@ angular.module('app').service('serviceUser', function ($http, config) {
         });
     };
 
-	this.deleteUser = function(auth) {
+	this.deleteUser = function(id) {
 		return $http({
             method: 'DELETE',
-            url: config.domain + '/user',
-            data: auth
+            url: config.domain + `/user/${id}`
         });
 	};
 });

@@ -19,8 +19,6 @@ module.exports.findByNameAndTeachingInstitute = async function(nameAndTeachingIn
     
     let select = await connection.find(nameAndTeachingInstitute);
 
-    console.log(await select.toArray());
-
     return await select.toArray();
 }
 
@@ -30,8 +28,6 @@ module.exports.findByUsername = async function(username) {
     
     let select = await connection.find({username: username});
 
-    console.log(await select.toArray());
-
     return await select.toArray();
 }
 
@@ -40,8 +36,6 @@ module.exports.findById = async function(objectId) {
     const connection = await mongodb.connection(collection);
     
     let select = await connection.find({_id: mongodb.mongoObjectId(objectId)});
-
-    console.log(await select.toArray());
 
     return await select.toArray();
 }
@@ -56,8 +50,6 @@ module.exports.update = async function(objectId, user) {
         $set: user 
     });
 
-    console.log(update.result);
-
     return update.result;
 }
 
@@ -68,8 +60,6 @@ module.exports.remove = async function(objectId) {
     let remove = await connection.remove({
         _id: mongodb.mongoObjectId(objectId)
     }, true);
-
-    console.log(remove.result);
 
     return remove.result;
 }

@@ -1,0 +1,6 @@
+<form ng-submit="findByName()" name="teachingInstituteFindForm">
+    <input type="text" ng-model="teachingInstitute.name" placeholder="Nome" required>
+
+    <input type="submit" ng-disabled="teachingInstituteFindForm.$invalid" value="Buscar">
+    <a href="/">Cancelar</a>
+</form>

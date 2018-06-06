@@ -1,9 +1,9 @@
-const serviceUser = require('../service/serviceUser.js');
+const serviceUser = require('../service/event.js');
 const bodyParser = require('body-parser');
 
 let router = require('express').Router();
 
-//Search meeting
+//Search event
 router.get('/', async function(request, response) {
     let object = request.body
 
@@ -12,7 +12,7 @@ router.get('/', async function(request, response) {
     response.send(await serviceUser.find(object));
 });
 
-//Insert user
+//Insert event
 router.post('/', async function(request, response) {
     let object = request.body
     
