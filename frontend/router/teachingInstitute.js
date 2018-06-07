@@ -4,9 +4,9 @@ angular.module('app').config(function($routeProvider) {
             templateUrl: './view/teachingInstitute/table.html',
             controller: 'controllerTeachingInstitute',
             resolve: {
-                data: function($rootScope, serviceTeachingInstitute) {
+                teachingInstitute: function($rootScope, serviceTeachingInstitute) {
                     if($rootScope.data !== null) {
-                        return $rootScope.data;
+                        return $rootScope;
                     } else {
                         return serviceTeachingInstitute.getAll();
                     }
@@ -17,7 +17,7 @@ angular.module('app').config(function($routeProvider) {
             templateUrl: './view/teachingInstitute/find.html',
             controller: 'controllerTeachingInstitute',
             resolve: {
-                data: () => null
+                teachingInstitute: () => null
             }
         })
 });

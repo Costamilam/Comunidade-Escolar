@@ -23,7 +23,7 @@ router.post('/', async function(request, response) {
     let auth = request.body;
 
     //Validate
-    
+
     let result = await service.findByUsername(auth.username);
 
     if(result.length == 1 && await bcrypt.checkPassword(result[0].password, auth.password)) {

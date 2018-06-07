@@ -53,10 +53,10 @@ module.exports.update = async function(objectId, user) {
     return update.result;
 }
 
-//Remove document of collection user
+//Remove one document of collection user
 module.exports.remove = async function(objectId) {
     const connection = await mongodb.connection(collection);
-    
+
     let remove = await connection.remove({
         _id: mongodb.mongoObjectId(objectId)
     }, true);

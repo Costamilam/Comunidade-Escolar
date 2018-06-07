@@ -1,0 +1,11 @@
+<form ng-submit="find()" name="eventFindForm">
+    <input type="text" ng-model="event.name" placeholder="Nome">
+    <input type="date" ng-model="event.date">
+    <select ng-model="event.teachingInstitute">
+        <option ng-selected="selected" value="">Instituição de Ensino</option>
+        <option ng-repeat="option in teachingInstitute" value="{{option._id}}">{{option.name}}</option>
+    </select>
+
+    <input type="submit" ng-disabled="eventFindForm.$invalid" value="Buscar">
+    <a href="/">Cancelar</a>
+</form>

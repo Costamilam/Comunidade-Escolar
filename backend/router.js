@@ -6,7 +6,7 @@ const app = express();
 const controllerTeachingInstitute = require('./controller/teachingInstitute.js');
 const controllerUser = require('./controller/user.js');
 const controllerAuth = require('./controller/auth.js');
-//const controllerMeeting = require('./controller/controllerMeeting');
+const controllerEvent = require('./controller/event.js');
 
 app.use(bodyParser.json());
 
@@ -20,7 +20,7 @@ app.all('*', function(req, res, next) {
 app.use('/teachingInstitute', controllerTeachingInstitute);
 app.use('/user', controllerUser);
 app.use('/auth', controllerAuth);
-//app.use('/meeting', controllerMeeting);
+app.use('/event', controllerEvent);
 
 app.use('/', express.static('../frontend'));
 

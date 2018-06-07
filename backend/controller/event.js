@@ -1,47 +1,70 @@
-const serviceUser = require('../service/event.js');
+const serviceEvent = require('../service/event.js');
 const bodyParser = require('body-parser');
 
 let router = require('express').Router();
 
-//Search event
-router.get('/', async function(request, response) {
-    let object = request.body
+//Search event by proprietys name, date and place (teaching institute)
+router.get('/name/(:name)?/place/(:teachingInstituteId)?/date/(:date)?', async function(request, response) {
+    let object = {};
 
-    //Validar entradas
+    if (request.params.name !== undefined) {
+        object.name = new RegExp(`.*${request.params.name.replace(' ', '.*')}.*`, 'i');
+    }
+    if (request.params.teachingInstituteId !== undefined) {
+        object.teachingInstitute = request.params.teachingInstituteId;
+    }
+    if (request.params.date !== undefined) {
+        object.date = request.params.date;
+    }
 
-    response.send(await serviceUser.find(object));
+    //Validate
+
+    response.send(await serviceEvent.find(object));
+});
+
+//Search event by propriety _id
+router.get('/id/:id', async function(request, response) {
+    //Validate
+
+    response.send(await serviceEvent.findById(request.params.id));
+});
+
+//Search event by propriety user
+router.get('/user/:id', async function(request, response) {
+    //Validate
+
+    response.send(await serviceEvent.findByUser(request.params.id));
 });
 
 //Insert event
 router.post('/', async function(request, response) {
     let object = request.body
-    
-    //Validar entradas
 
-    response.send(await serviceUser.insert(object));
+    //Validate
+
+    response.send(await serviceEvent.insert(object));
 });
 
-//Update user
+//Update event
 router.put('/', async function(request, response) {
-    let objectSearch = {
-        name: request.body.meetingName
-    }
-    let objectUpdate = {
-        date: request.body.meetingDate, 
-        place: request.body.meetingPlace
-    }
-    //Validar entradas
+    let event = request.body;
 
-    response.send(await serviceUser.update(objectSearch, objectUpdate));
+    let id = event._id;
+
+    delete event._id;
+
+    //Validate
+
+    response.send(await serviceEvent.update(id, event));
 });
 
-//Delete user
-router.delete('/', async function(request, response) {
-    let object = request.body
-    
-    //Validar entradas
+//Delete event
+router.delete('/:id', async function(request, response) {
+    //Validate
 
-    response.send(await serviceUser.remove(object));
+    console.log(request.params.id)
+
+    response.send(await serviceEvent.remove(request.params.id));
 });
 
 module.exports = router;

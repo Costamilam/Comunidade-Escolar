@@ -127,17 +127,17 @@ form {
     display: flex;
     flex-direction: column;
 }
-input:not([type="radio"]), select, option, label, button, form a {
+input:not([type="radio"]), textarea, select, option, label, button, form a {
     color: #000;
     padding: 5px;
 }
-input:not([type="radio"]), label, select {
+input:not([type="radio"]), textarea, label, select {
     margin: 15px auto;
 }
-input:not([type="radio"]), select, option, button, form a {
+input:not([type="radio"]), textarea, select, option, button, form a {
     width: 300px;
 }
-input:not([type="submit"]):not([type="radio"]), select {
+input:not([type="submit"]):not([type="radio"]), textarea, select {
     border-width: 0 0 1px 0;
     border-bottom-color: black;
 }
@@ -150,22 +150,22 @@ input[type="submit"], button, form a {
     text-align: center;
     font-size: 1rem;
 }
-input, button {
+input, button, textarea {
     transition: border ease-in-out 0.7s, color ease-in-out 0.7s;
 }
-input:focus:required:invalid {
+input:focus:required:invalid, textarea:focus:required:invalid {
     border-bottom-color: #CC0000
 }
 input[valid="false"]:focus {
     border-bottom-color: #CC0000 !important;
 }
-input:focus:required:valid {
+input:focus:required:valid, textarea:focus:required:valid, input:optional:focus, textarea:optional:focus {
     border-bottom-color: #00CC00
 }
 input:disabled, button:disabled {
     color: #C2C2C2;
 }
-input:focus, button:focus {
+input:focus, button:focus, textarea:focus {
     outline: 0;
 }
 
@@ -177,6 +177,10 @@ table {
 }
 td, th {
     overflow: hidden;
+}
+table tr td i {
+    width: 100%;
+    text-align: center;
 }
 table tr th {
     color: #FFF;

@@ -1,6 +1,6 @@
 angular.module('app').controller('controllerAuth', function($scope, $location, serviceAuth) {
-	$scope.authUser = function() {
-		serviceAuth.authUser($scope.auth).then(function(data) {
+	$scope.authenticate = function() {
+		serviceAuth.authenticate($scope.auth).then(function(data) {
 			delete $scope.auth;
             $scope.userAuthForm.$setPristine();
 

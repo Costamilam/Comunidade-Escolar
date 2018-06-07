@@ -1,4 +1,4 @@
-<form ng-submit="changeUser()" name="userChangeForm">
+<form ng-submit="change()" name="userChangeForm">
     <input type="text" ng-model="user.name" placeholder="Nome" required>
     <input type="text" ng-model="user.username" placeholder="Nome de usuário" disabled>
     <input type="password" ng-model="user.password" placeholder="Senha">
@@ -15,6 +15,6 @@
     </select>
 
     <input type="submit" ng-disabled="userFindForm.$invalid" value="Atualizar">
-    <button type="button" ng-click="deleteUser()">Deletar Conta</button>
+    <button type="button" ng-click="delete()">Deletar Conta</button>
     <button type="button">Cancelar</button>
 </form>

@@ -4,25 +4,25 @@ const bcrypt = require('../bcrypt.js');
 
 const router = require('express').Router();
 
-//Search user
+//Search user by proprietys name and/or teaching institute
 router.get('/name/(:name)?/teachingInstitute/(:teachingInstituteId)?', async function(request, response) {
-    let user = {
-        name: new RegExp(`.*${request.params.name.replace(' ', '.*')}.*`, 'i'),
-        teachingInstitute: request.params.teachingInstituteId
-    };
+    let user = {};
+
+    if (request.params.name !== undefined) {
+        user.name = new RegExp(`.*${request.params.name.replace(' ', '.*')}.*`, 'i');
+    }
+    if (request.params.teachingInstituteId !== undefined) {
+        user.teachingInstitute = request.params.teachingInstituteId;
+    }
 
     //Validate
-
-    if (request.params.teachingInstituteId === undefined) {
-        delete user.teachingInstitute;
-    }
 
     let result = await service.findByNameAndTeachingInstitute(user);
 
     response.send(result);
 });
 
-//Search userUsername
+//Search user by propriety username
 router.get('/username/:username', async function(request, response) {
     //Validate
 
@@ -41,15 +41,15 @@ router.post('/', async function(request, response) {
 
     let result = await service.insert(user);
 
-    response.send({
-        result: result
-    });
+    response.send(result);
 });
 
 //Update user
 router.put('/', async function(request, response) {
     let user = request.body;
+
     let id = user._id;
+    
     delete user._id;
 
     //Validate
@@ -62,9 +62,7 @@ router.put('/', async function(request, response) {
 
     let result = await service.update(id, user);
 
-    response.send({
-        result: await service.findById(id)
-    });
+    response.send(await service.findById(id));
 });
 
 //Delete user

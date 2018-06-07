@@ -1,5 +1,5 @@
 angular.module('app').service('serviceAuth', function ($http, config) {
-	this.authUser = function(auth) {
+	this.authenticate = function(auth) {
 		return $http({
             method: 'POST',
             url: config.domain + '/auth',
@@ -14,6 +14,10 @@ angular.module('app').service('serviceAuth', function ($http, config) {
     }
 
     this.getDataLocally = function() {
+        if(sessionStorage.user === undefined) {
+            return null;
+        }
+
         let user = JSON.parse(sessionStorage.user);
 
         user.birth = new Date(user.birth);

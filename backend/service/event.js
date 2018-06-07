@@ -1,50 +1,67 @@
-const mongodbConnection = require('./mongodbConnection.js');
+const mongodb = require('./mongodb.js');
 
-const collection = 'Meeting';
+const collection = 'event';
 
-//Insert document of collection
+//Insert one document in collection
 module.exports.insert = async function(object) {
-    const connection = await mongodbConnection.connection();
+    const connection = await mongodb.connection(collection);
 
-    let insert = await connection.collection(collection).insertOne(object);
+    let insert = await connection.insertOne(object);
 
-    console.log(`Inserted ${insert.insertedCount} document into the collection. Document id: ${insert.insertedId}`);
-    
-    return insert;
+    return insert.ops;
 }
 
 //Find document of collection
-module.exports.find = async function(object) {
-    const connection = await mongodbConnection.connection();
+module.exports.find = async function(event) {
+    const connection = await mongodb.connection(collection);
     
-    let select = await connection.collection(collection).find(object);
+    let select = await connection.find(event);
 
-    console.log(`Find ${await select.count()} documents into the collection. Document values:`);
-    select.forEach(function(element) {
-        console.log(`${element}`);
+    return select.toArray();
+}
+
+//Find document of collection
+module.exports.findById = async function(objectId) {
+    const connection = await mongodb.connection(collection);
+    
+    let select = await connection.find({
+        _id: mongodb.mongoObjectId(objectId)
     });
 
-    return select;
+    return select.toArray();
+}
+
+//Find document of collection
+module.exports.findByUser = async function(stringId) {
+    const connection = await mongodb.connection(collection);
+    
+    let select = await connection.find({
+        user: stringId
+    });
+
+    return select.toArray();
 }
 
 //Update document of collection
-module.exports.update = async function(objectSearch, objectUpdate) {
-    const connection = await mongodbConnection.connection();
-    
-    let update = await connection.collection(collection).updateOne(objectSearch, { $set: objectUpdate });
+module.exports.update = async function(objectId, event) {
+    const connection = await mongodb.connection(collection);
 
-    console.log(`The id document ${update.upsertedId} has been changed:\n${update.result}`);
+    let update = await connection.updateOne({
+        _id: mongodb.mongoObjectId(objectId)
+    }, { 
+        $set: event 
+    });
 
-    return update;
+    return update.result;
 }
 
-//Remove document of collection
-module.exports.remove = async function(object) {
-    const connection = await mongodbConnection.connection();
-    
-    let remove = await connection.collection(collection).remove(object, true);
+//Remove one document of collection
+module.exports.remove = async function(objectId) {
+    const connection = await mongodb.connection(collection);
 
-    console.log(`The document removed\n${remove.toString()}`);
+    let remove = await connection.remove({
+        _id: mongodb.mongoObjectId(objectId)
+    }, true);
 
-    return remove;
+    return remove.result;
 }

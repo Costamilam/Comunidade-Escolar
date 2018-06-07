@@ -6,8 +6,8 @@ angular.module('app').controller('controllerUser', function($rootScope, $scope, 
 		$scope.user = currentUser;
 	}
 
-	$scope.addUser = function() {
-		serviceUser.addUser($scope.user).then(function(data) {
+	$scope.add = function() {
+		serviceUser.add($scope.user).then(function(data) {
 			delete $scope.user;
 			$scope.userAddForm.$setPristine();
 			
@@ -20,14 +20,15 @@ angular.module('app').controller('controllerUser', function($rootScope, $scope, 
 	$scope.verifyUsername = function() {
 		serviceUser.verifyUsername($scope.user.username).then(function(data) {
 			document.getElementsByName('username')[0].setAttribute('valid', JSON.parse(data.data));
+
 			$scope.userAddForm.$invalid = !JSON.parse(data.data);
 		}).catch(function(error) {
 			alert('Falha ao verificar o nome de usuário');
 		});
     };
 
-	$scope.findUser = function() {
-		serviceUser.findUser($scope.user.name, $scope.user.teachingInstitute).then(function(data) {
+	$scope.find = function() {
+		serviceUser.find($scope.user.name, $scope.user.teachingInstitute).then(function(data) {
 			delete $scope.user;
 			$scope.userFindForm.$setPristine();
 
@@ -39,8 +40,8 @@ angular.module('app').controller('controllerUser', function($rootScope, $scope, 
 		});
     };
 
-	$scope.changeUser = function() {
-		serviceUser.changeUser($scope.user).then(function(data) {
+	$scope.change = function() {
+		serviceUser.change($scope.user).then(function(data) {
 			delete $scope.user;
 			$scope.userChangeForm.$setPristine();
 
@@ -52,8 +53,8 @@ angular.module('app').controller('controllerUser', function($rootScope, $scope, 
 		});
     };
 
-	$scope.deleteUser = function() {
-		serviceUser.deleteUser($scope.user._id).then(function(data) {
+	$scope.delete = function() {
+		serviceUser.delete($scope.user._id).then(function(data) {
 			delete $scope.user;
 			$scope.userChangeForm.$setPristine();
 

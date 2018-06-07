@@ -43,8 +43,5 @@ angular.module('app').config(function($routeProvider) {
         .when('/user/auth', {
             templateUrl: './view/user/auth.html',
             controller: 'controllerAuth'
-        })
-
-        //Outhers redirect (404)
-        .otherwise({redirectTo: "/"});
+        });
 });

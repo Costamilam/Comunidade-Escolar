@@ -1,0 +1,12 @@
+<form ng-submit="add()" name="eventAddForm">
+    <input type="text" ng-model="event.name" required placeholder="Nome">
+    <input type="date" ng-model="event.date" required>
+    <select ng-model="event.teachingInstitute" required>
+        <option disabled ng-selected="selected" value="">Instituição de Ensino</option>
+        <option ng-repeat="option in teachingInstitute" value="{{option._id}}">{{option.name}}</option>
+    </select>
+    <textarea ng-model="event.description" required minlength="25"></textarea>
+
+    <input type="submit" ng-disabled="eventAddForm.$invalid" value="Cadastrar">
+    <a href="/">Cancelar</a>
+</form>

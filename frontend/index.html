@@ -5,16 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" type="text/css" href="./css/style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.10/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.10/angular-route.min.js"></script>
     <script src="./app.js"></script>
     <script src="./value/config.js"></script>
     <script src="./router/user.js"></script>
+    <script src="./router/event.js"></script>
     <script src="./router/teachingInstitute.js"></script>
     <script src="./service/user.js"></script>
+    <script src="./service/event.js"></script>
     <script src="./service/auth.js"></script>
     <script src="./service/teachingInstitute.js"></script>
     <script src="./controller/user.js"></script>
+    <script src="./controller/event.js"></script>
     <script src="./controller/auth.js"></script>
     <script src="./controller/teachingInstitute.js"></script>
 </head>
@@ -36,11 +40,11 @@
                     <li><a href="#!/user/find">Buscar</a></li>
                 </ul>
             </li>
-            <li><a>Encontros</a>
+            <li><a>Eventos</a>
                 <ul>
-                    <li><a href="">Criar</a></li>
-                    <li><a href="">Buscar</a></li>
-                    <li><a href="">Meus</a></li>
+                    <li><a href="#!/event/add">Criar</a></li>
+                    <li><a href="#!/event/find">Buscar</a></li>
+                    <li><a href="#!/event/my">Meus</a></li>
                 </ul>
             </li>
         </ul>

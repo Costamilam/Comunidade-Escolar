@@ -1,8 +1,10 @@
-angular.module('app').controller('controllerTeachingInstitute', function($rootScope, $scope, $location, data, serviceTeachingInstitute) {
-	if($rootScope.data === null && data !== null) {
-		$scope.data = data.data;
+angular.module('app').controller('controllerTeachingInstitute', function($rootScope, $scope, $location, teachingInstitute, serviceTeachingInstitute) {
+
+	if(teachingInstitute !== null) {
+		$scope.data = teachingInstitute.data;
+		$rootScope.data = null;
 	}
-	
+
 	$scope.findByName = function() {
 		serviceTeachingInstitute.findByName($scope.teachingInstitute.name).then(function(data) {
 			delete $scope.teachingInstitute;
