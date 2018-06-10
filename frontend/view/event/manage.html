@@ -1,7 +1,7 @@
 <form ng-submit="change()" name="eventChangeForm">
     <input type="text" ng-model="event[0].name" required placeholder="Nome">
     <input type="date" ng-model="event[0].date" required format-date>
-    <select ng-model="event[0].teachingInstitute" required>
+    <select ng-model="event[0].teachingInstitute[0]._id" required>
         <option disabled ng-selected="selected" value="">Instituição de Ensino</option>
         <option ng-repeat="option in teachingInstitute" value="{{option._id}}">{{option.name}}</option>
     </select>

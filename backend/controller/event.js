@@ -45,6 +45,13 @@ router.post('/', async function(request, response) {
     response.send(await serviceEvent.insert(object));
 });
 
+//Insert participant in event
+router.post('/participant', async function(request, response) {
+    //Validate
+
+    response.send(await serviceEvent.insertParticipant(request.body.eventId, request.body.userId));
+});
+
 //Update event
 router.put('/', async function(request, response) {
     let event = request.body;
@@ -56,6 +63,13 @@ router.put('/', async function(request, response) {
     //Validate
 
     response.send(await serviceEvent.update(id, event));
+});
+
+//Delete participant in event
+router.delete('/:eventId/participant/:userId', async function(request, response) {
+    //Validate
+
+    response.send(await serviceEvent.removeParticipant(request.params.eventId, request.params.userId));
 });
 
 //Delete event

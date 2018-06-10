@@ -121,6 +121,9 @@ h1 {
 a {
     text-decoration: none;
 }
+i {
+    color: #000;
+}
 
  /* Inputs - form and inputs style */
 form {
@@ -178,7 +181,7 @@ table {
 td, th {
     overflow: hidden;
 }
-table tr td i {
+table tr td i, table tr td i {
     width: 100%;
     text-align: center;
 }

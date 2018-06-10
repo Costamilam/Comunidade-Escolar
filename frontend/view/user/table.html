@@ -9,16 +9,18 @@
             <th>Gênero</th>
             <th>Telefone</th>
             <th>Email</th>
+            <th>Instituição</th>
         </tr>
     </thead>
     <tbody>
         <tr ng-repeat="user in data">
             <td>{{user.name}}</td>
-            <td>{{user.birth | date:'dd/MM'}}</td>
             <td>{{getAge(user.birth)}}</td>
+            <td>{{user.birth | date:'dd/MM'}}</td>
             <td>{{getGender(user.gender)}}</td>
             <td>{{user.phone}}</td>
             <td>{{user.email}}</td>
+            <td>{{user.teachingInstitute[0].name}}</td>
         </tr>
     </tbody>
 </table>

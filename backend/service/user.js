@@ -6,18 +6,33 @@ const collection = 'user';
 module.exports.insert = async function(user) {
     const connection = await mongodb.connection(collection);
 
+    user.teachingInstitute = mongodb.mongoObjectId(user.teachingInstitute);
+
     let insert = await connection.insertOne(user);
 
-    console.log(insert.ops);
-    
     return insert.ops;
 }
 
 //Find document of collection user by propriety name
 module.exports.findByNameAndTeachingInstitute = async function(nameAndTeachingInstitute) {
-    const connection = await mongodb.connection(collection);
+    let connection = await mongodb.connection(collection);
     
-    let select = await connection.find(nameAndTeachingInstitute);
+    if(nameAndTeachingInstitute.teachingInstitute !== undefined) {
+        nameAndTeachingInstitute.teachingInstitute = mongodb.mongoObjectId(nameAndTeachingInstitute.teachingInstitute);
+    }
+
+    let select = await connection.aggregate([
+        {
+            $lookup: {
+                from: "teachingInstitute",
+                localField: "teachingInstitute",
+                foreignField: "_id",
+                as: "teachingInstitute"
+            }
+        }, {
+            $match: nameAndTeachingInstitute 
+        }
+    ]);
 
     return await select.toArray();
 }
@@ -32,20 +47,22 @@ module.exports.findByUsername = async function(username) {
 }
 
 //Find document of collection user by propriety _id
-module.exports.findById = async function(objectId) {
+module.exports.findById = async function(userId) {
     const connection = await mongodb.connection(collection);
     
-    let select = await connection.find({_id: mongodb.mongoObjectId(objectId)});
+    let select = await connection.find({_id: mongodb.mongoObjectId(userId)});
 
     return await select.toArray();
 }
 
 //Update document of collection user
-module.exports.update = async function(objectId, user) {
+module.exports.update = async function(userId, user) {
     const connection = await mongodb.connection(collection);
 
+    user.teachingInstitute = mongodb.mongoObjectId(user.teachingInstitute);
+
     let update = await connection.updateOne({
-        _id: mongodb.mongoObjectId(objectId)
+        _id: mongodb.mongoObjectId(userId)
     }, { 
         $set: user 
     });

@@ -52,7 +52,6 @@ angular.module('app').controller('controllerEvent', function($rootScope, $scope,
     };
 
 	$scope.delete = function() {
-		console.log($scope.event[0]._id)
 		serviceEvent.delete($scope.event[0]._id).then(function(data) {
 			delete $scope.event;
 			$scope.eventChangeForm.$setPristine();
@@ -62,4 +61,56 @@ angular.module('app').controller('controllerEvent', function($rootScope, $scope,
 			alert('Falha ao excluir evnto');
 		});
 	};
+
+	$scope.addParticipant = function() {
+		let auth = serviceAuth.getDataLocally();
+
+		if(auth === null || auth._id === undefined) {
+			alert('Conecte-se para poder participar de eventos');
+
+			$location.path('/user/auth');
+		} else {
+			let object = {
+				eventId: $scope.event[0]._id,
+				userId: auth._id
+			};
+
+			serviceEvent.addParticipant(object).then(function(data) {
+				if($scope.event[0].participant === undefined) {
+					$scope.event[0].participant = [];
+				}
+				
+				$scope.event[0].participant.push(auth._id);
+			}).catch(function(error) {
+				alert('Falha ao cadastrar evnto');
+			});
+		}
+	}
+
+	$scope.deleteParticipant = function() {
+		let auth = serviceAuth.getDataLocally();
+
+		if(auth === null || auth._id === undefined) {
+			alert('Conecte-se para poder participar e sair de eventos');
+
+			$location.path('/user/auth');
+		} else {
+			serviceEvent.deleteParticipant($scope.event[0]._id, auth._id).then(function(data) {
+				$scope.event[0].participant.splice($scope.event[0].participant.indexOf(auth._id), 1);
+			}).catch(function(error) {
+				console.log(error)
+				alert('Falha ao cadastrar evnto');
+			});
+		}
+	}
+
+	$scope.isParticipant = function() {
+		if(!$scope.event[0].participant) {
+			return false;
+		}
+
+		let auth = serviceAuth.getDataLocally();
+
+		return $scope.event[0].participant.indexOf(auth._id) == -1 ? false : true;
+	}
 });

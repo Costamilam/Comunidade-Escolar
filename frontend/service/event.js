@@ -36,6 +36,22 @@ angular.module('app').service('serviceEvent', function ($http, config) {
         });
     };
 
+	this.addParticipant = function(event) {
+		return $http({
+            method: 'POST',
+            url: config.domain + '/event/participant',
+            data: event
+        });
+    };
+
+    this.deleteParticipant = function(eventId, userId) {
+		return $http({
+            method: 'DELETE',
+            url: config.domain + `/event/${eventId}/participant/${userId}`,
+            data: event
+        });
+    };
+
 	this.delete = function(id) {
 		return $http({
             method: 'DELETE',
