@@ -34,8 +34,6 @@ module.exports.findByNameAndTeachingInstitute = async function(nameAndTeachingIn
         }
     ]);
 
-    console.log(await select.toArray())
-
     return await select.toArray();
 }
 
