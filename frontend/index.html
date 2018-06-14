@@ -4,12 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" href="https://www.shareicon.net/download/2017/05/16/886056_education.ico">
     <link rel="stylesheet" type="text/css" href="./css/style.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.10/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.10/angular-route.min.js"></script>
     <script src="./app.js"></script>
-    <script src="./value/config.js"></script>
+    <script src="./config/config.js"></script>
+    <script src="./config/interceptor.js"></script>
+    <script src="./router/error.js"></script>
     <script src="./router/user.js"></script>
     <script src="./router/event.js"></script>
     <script src="./router/teachingInstitute.js"></script>
@@ -17,6 +20,7 @@
     <script src="./service/event.js"></script>
     <script src="./service/auth.js"></script>
     <script src="./service/teachingInstitute.js"></script>
+    <script src="./controller/error.js"></script>
     <script src="./controller/user.js"></script>
     <script src="./controller/event.js"></script>
     <script src="./controller/auth.js"></script>
@@ -25,7 +29,7 @@
 <body>
     <header><nav>
         <ul>
-            <li><a href="/">Home</a></li>
+            <li><a href="#!/">Home</a></li>
             <li><a>Instituições</a>
                 <ul>
                     <li><a href="#!/teachingInstitute/table" ng-click="getAll()">Todas</a></li>
@@ -49,12 +53,6 @@
             </li>
         </ul>
     </nav></header>
-
-    <!--dialog>
-        <h1>{{dialogTitle}}</h1>
-        <p>{{dialogMessage}}</p>
-        <button ng-click="dialog.removeAttribute('open')">FECHAR</button>
-    </dialog-->
 
     <ng-view></ng-view>
 </body>

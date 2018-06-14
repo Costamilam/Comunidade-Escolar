@@ -1,43 +1,34 @@
 const service = require('../service/user.js');
-const bcrypt = require('../bcrypt.js');
+const code = require('../code.js');
 
 let router = require('express').Router();
 
-//Verify auth user
-/*router.all(/(\/user\/|\/meeting\/)/, async function(request, response, next) {
-    let result = await service.find({userLastToken: request.headers.authorization}, 'user');
-    
-    if(result.length === 1 && result[0].userLastAuth > Date.now()) {
-        await service.update(result[0]._id, {
-            userLastAuth: Date.now() + 1000 * 60 * 15
-        }, 'user');
-
+router.use(async function (request, res, next) {
+    if(((request.url === '/auth' || request.url === '/user') && request.method === 'POST') || (request.url === '/teachingInstitute' && request.method === 'GET') || request.url === '/') {
         next();
+    } else if(request.headers.authorization === undefined) {
+        res.status(400).send('Autenticação necessária para acessar o recurso');
+    } else if(!await code.decodeToken(request.headers.authorization)) {
+        res.status(401).send('Acesso inválido ou expirado');
     } else {
-        response.status(203).send({title: 'Acesso negado', message: 'Token de acesso inválido ou expirado, conecte-se novamente'});
+        next();
     }
-});*/
+});
 
 //Auth user
-router.post('/', async function(request, response) {
+router.post('/auth', async function(request, response) {
     let auth = request.body;
 
     //Validate
 
     let result = await service.findByUsername(auth.username);
 
-    if(result.length == 1 && await bcrypt.checkPassword(result[0].password, auth.password)) {
-        result[0].lastToken = await bcrypt.generateToken();
-        result[0].lastAuth = Date.now() + 1000 * 60 * 15;
-
-        await service.update(result[0]._id, {
-            lastToken: result[0].lastToken,
-            lastAuth: result[0].lastAuth
-        });
+    if(result.length == 1 && await code.checkPassword(result[0].password, auth.password)) {
+        result[0].token = await code.generateToken();
 
         response.send(result[0]);
     } else {
-        response.status(400).send();
+        response.status(401).send('Usuário ou senha inválidos');
     }
 });
 

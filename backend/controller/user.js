@@ -1,6 +1,6 @@
 const service = require('../service/user.js');
 
-const bcrypt = require('../bcrypt.js');
+const code = require('../code.js');
 
 const router = require('express').Router();
 
@@ -14,6 +14,8 @@ router.get('/name/(:name)?/teachingInstitute/(:teachingInstituteId)?', async fun
     if (request.params.teachingInstituteId !== undefined) {
         user.teachingInstitute = request.params.teachingInstituteId;
     }
+
+    console.log(user)
 
     //Validate
 
@@ -37,7 +39,7 @@ router.post('/', async function(request, response) {
 
     //Validate
     
-    user.password = await bcrypt.hashPassword(user.password);
+    user.password = await code.hashPassword(user.password);
 
     let result = await service.insert(user);
 
@@ -57,7 +59,7 @@ router.put('/', async function(request, response) {
     if (user.password === undefined) {
         delete user.password;
     } else {
-        user.password = await bcrypt.hashPassword(user.password);
+        user.password = await code.hashPassword(user.password);
     }
 
     let result = await service.update(id, user);

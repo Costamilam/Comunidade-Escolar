@@ -1,4 +1,8 @@
-<h1>{{data.length}} Instituição(ões) Econtrada(s)</h1>
+<h1>{{max}} Instituição(ões) Econtrada(s)</h1>
+
+<a href="#!/teachingInstitute/table/{{page-1}}"><button ng-disabled="page <= 1">Anterior</button></a>
+<strong>{{(page - 1) * 25}} ~ {{(page - 1) * 25 + 25}} de {{max}}</strong>
+<a href="#!/teachingInstitute/table/{{page+1}}"><button ng-disabled="page >= {{max / 25}}">Proximo</button></a>
 
 <table>
     <thead>

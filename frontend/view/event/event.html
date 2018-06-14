@@ -14,5 +14,5 @@
     <li ng-repeat="user in event[0].participant">{{user.name}}</li>
 </ul>
 
-<button ng-show="isParticipant() === false" ng-click="addParticipant()">Participar do Evento</button>
-<button ng-show="isParticipant() === true" ng-click="deleteParticipant()">Sair do Evento</button>
+<button ng-show="show === false" ng-click="addParticipant()">Participar do Evento</button>
+<button ng-show="show === true" ng-click="deleteParticipant()">Sair do Evento</button>

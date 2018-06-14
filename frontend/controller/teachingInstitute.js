@@ -1,20 +1,12 @@
-angular.module('app').controller('controllerTeachingInstitute', function($rootScope, $scope, $location, teachingInstitute, serviceTeachingInstitute) {
-
+angular.module('app').controller('controllerTeachingInstitute', function($rootScope, $scope, $location, $routeParams, teachingInstitute, serviceTeachingInstitute) {
 	if(teachingInstitute !== null) {
-		$scope.data = teachingInstitute.data;
-		$rootScope.data = null;
+		$scope.data = teachingInstitute.data.result;
+		$scope.max = teachingInstitute.data.count;
 	}
 
-	$scope.findByName = function() {
-		serviceTeachingInstitute.findByName($scope.teachingInstitute.name).then(function(data) {
-			delete $scope.teachingInstitute;
-			$scope.teachingInstituteFindForm.$setPristine();
+	$scope.page = parseInt($routeParams.page) || 1;
 
-			$rootScope.data = data.data;
-			
-			$location.path('/teachingInstitute/table');
-		}).catch(function(error) {
-			alert('Falha ao buscar instituições de ensino');
-		});
+	$scope.findByName = function() {
+		$location.path(`/teachingInstitute/find/${$scope.teachingInstitute.name}`)
     };
 });

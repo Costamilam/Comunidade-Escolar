@@ -21,6 +21,9 @@ module.exports.findByNameAndTeachingInstitute = async function(nameAndTeachingIn
         nameAndTeachingInstitute.teachingInstitute = mongodb.mongoObjectId(nameAndTeachingInstitute.teachingInstitute);
     }
 
+    console.log(nameAndTeachingInstitute)
+    console.log(typeof nameAndTeachingInstitute.teachingInstitute)
+
     let select = await connection.aggregate([
         {
             $lookup: {
@@ -33,6 +36,8 @@ module.exports.findByNameAndTeachingInstitute = async function(nameAndTeachingIn
             $match: nameAndTeachingInstitute 
         }
     ]);
+
+    console.log(await select.toArray())
 
     return await select.toArray();
 }

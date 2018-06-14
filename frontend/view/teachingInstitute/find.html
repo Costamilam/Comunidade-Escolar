@@ -4,3 +4,24 @@
     <input type="submit" ng-disabled="teachingInstituteFindForm.$invalid" value="Buscar">
     <a href="/">Cancelar</a>
 </form>
+
+<h1>{{data.length || 0}} Instituição(ões) Econtrada(s)</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Telefone</th>
+            <th>Email/Site</th>
+            <th>Endereço</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="teachingInstitute in data">
+            <td>{{teachingInstitute.name}}</td>
+            <td>{{teachingInstitute.phone}}</td>
+            <td>{{teachingInstitute.domain}}</td>
+            <td>{{teachingInstitute.place}}</td>
+        </tr>
+    </tbody>
+</table>

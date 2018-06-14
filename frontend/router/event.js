@@ -6,7 +6,14 @@ angular.module('app').config(function($routeProvider) {
             resolve: {
                 currentEvent: () => null,
                 teachingInstitute: function(serviceTeachingInstitute) {
-                    return serviceTeachingInstitute.getAll();
+                    try {
+                        return serviceTeachingInstitute.getAll();
+                    } catch (error) {
+                        console.log('error');
+                        console.log(error);
+                        return null;
+                    }
+                    
                 }
             }
         })
@@ -50,8 +57,6 @@ angular.module('app').config(function($routeProvider) {
                     let auth = serviceAuth.getDataLocally();
 
                     if(auth === null || auth._id === undefined) {
-                        alert('Conecte-se para poder gerenciar seus eventos');
-
                         return null;
                     } else {
                         return serviceEvent.findByUser(auth._id);

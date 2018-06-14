@@ -80,7 +80,9 @@ angular.module('app').controller('controllerEvent', function($rootScope, $scope,
 					$scope.event[0].participant = [];
 				}
 				
-				$scope.event[0].participant.push(auth._id);
+				$scope.event[0].participant.push(auth);
+
+				$scope.show = true;
 			}).catch(function(error) {
 				alert('Falha ao cadastrar evnto');
 			});
@@ -96,7 +98,13 @@ angular.module('app').controller('controllerEvent', function($rootScope, $scope,
 			$location.path('/user/auth');
 		} else {
 			serviceEvent.deleteParticipant($scope.event[0]._id, auth._id).then(function(data) {
-				$scope.event[0].participant.splice($scope.event[0].participant.indexOf(auth._id), 1);
+				for(let i = 0; i < $scope.event[0].participant.length; i++) {
+					if($scope.event[0].participant[i]._id === auth._id) {
+						$scope.event[0].participant.splice(i, 1);
+					}
+				}
+
+				$scope.show = false;
 			}).catch(function(error) {
 				console.log(error)
 				alert('Falha ao cadastrar evnto');
@@ -105,12 +113,18 @@ angular.module('app').controller('controllerEvent', function($rootScope, $scope,
 	}
 
 	$scope.isParticipant = function() {
-		if(!$scope.event[0].participant) {
+		if(!$scope.event || !$scope.event[0] || !$scope.event[0].participant) {
 			return false;
 		}
 
 		let auth = serviceAuth.getDataLocally();
 
-		return $scope.event[0].participant.indexOf(auth._id) == -1 ? false : true;
+		for(let element of $scope.event[0].participant) {
+			return element._id === auth._id ? true : false;
+		};
+
+		return false;
 	}
+
+	$scope.show = $scope.isParticipant();
 });

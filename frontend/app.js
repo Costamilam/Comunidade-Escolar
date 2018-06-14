@@ -5,8 +5,9 @@ angular.module('app').run(function($rootScope) {
 });
 
 angular.module('app').config(function($routeProvider) {
-    //Outhers redirect (404)
-    $routeProvider.otherwise({redirectTo: "/"});
+    $routeProvider.when('/', {
+            templateUrl: './view/home.html'
+        })
 });
 
 angular.module('app').directive("formatDate", function() {

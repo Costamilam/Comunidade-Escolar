@@ -29,6 +29,7 @@ angular.module('app').controller('controllerUser', function($rootScope, $scope, 
 
 	$scope.find = function() {
 		serviceUser.find($scope.user.name, $scope.user.teachingInstitute).then(function(data) {
+			console.log($scope.user.teachingInstitute)
 			delete $scope.user;
 			$scope.userFindForm.$setPristine();
 

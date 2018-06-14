@@ -17,11 +17,12 @@ app.all('*', function(req, res, next) {
     next();
 });
 
+app.use('/', express.static('../frontend'));
+
+app.use('/', controllerAuth);
+
 app.use('/teachingInstitute', controllerTeachingInstitute);
 app.use('/user', controllerUser);
-app.use('/auth', controllerAuth);
 app.use('/event', controllerEvent);
-
-app.use('/', express.static('../frontend'));
 
 app.listen(3000, () => console.log('Started successfully'));

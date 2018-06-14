@@ -2,7 +2,14 @@ angular.module('app').service('serviceTeachingInstitute', function ($http, confi
 	this.getAll = function() {
 		return $http({
             method: 'GET',
-            url: config.domain + '/teachingInstitute'
+            url: config.domain + `/teachingInstitute`
+        });
+    };
+    
+    this.find = function(page) {
+		return $http({
+            method: 'GET',
+            url: config.domain + `/teachingInstitute/${page}`
         });
     };
     
