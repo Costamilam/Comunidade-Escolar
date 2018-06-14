@@ -15,8 +15,6 @@ router.get('/name/(:name)?/teachingInstitute/(:teachingInstituteId)?', async fun
         user.teachingInstitute = request.params.teachingInstituteId;
     }
 
-    console.log(user)
-
     //Validate
 
     let result = await service.findByNameAndTeachingInstitute(user);
