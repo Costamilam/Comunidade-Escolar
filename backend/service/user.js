@@ -21,9 +21,6 @@ module.exports.findByNameAndTeachingInstitute = async function(nameAndTeachingIn
         nameAndTeachingInstitute.teachingInstitute = mongodb.mongoObjectId(nameAndTeachingInstitute.teachingInstitute);
     }
 
-    console.log(nameAndTeachingInstitute)
-    console.log(typeof nameAndTeachingInstitute.teachingInstitute)
-
     let select = await connection.aggregate([
         {
             $lookup: {
